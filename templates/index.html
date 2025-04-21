@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Disease Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            background-color: #fff;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        form input, form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 30px;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            color: #333;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            color: white;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>❤️ Heart Disease Predictor</h2>
+        <form action="/predict" method="post">
+            <input type="text" name="age" placeholder="Enter your age" required>
+            <select name="sex">
+                <option value="1">Male</option>
+                <option value="0">Female</option>
+            </select>
+            <select name="cp">
+                <option value="0">Typical angina</option>
+                <option value="1">Atypical angina</option>
+                <option value="2">Non-anginal pain</option>
+                <option value="3">Asymptomatic</option>
+            </select>
+            <input type="text" name="trestbps" placeholder="Resting Blood Pressure" required>
+            <input type="text" name="chol" placeholder="Cholesterol Level" required>
+            <select name="fbs">
+                <option value="1">for Fasting Blood Sugar > 120</option>
+                <option value="0">Fasting Blood Sugar <= 120</option>
+            </select>
+            <select name="restecg">
+                <option value="0">Normal ECG</option>
+                <option value="1">ST-T Wave Abnormality</option>
+                <option value="2">Left Ventricular Hypertrophy</option>
+            </select>
+            <input type="text" name="thalach" placeholder="Max Heart Rate Achieved" required>
+            <select name="exang">
+                <option value="1">Exercise-Induced Angina (Yes)</option>
+                <option value="0">No Exercise-Induced Angina</option>
+            </select>
+            <input type="text" name="oldpeak" placeholder="Oldpeak (ST Depression)" required>
+            <select name="slope">
+                <option value="0">Upsloping</option>
+                <option value="1">Flat</option>
+                <option value="2">Downsloping</option>
+            </select>
+            <select name="ca">
+                <option value="0">0 major vessels</option>
+                <option value="1">1 major vessel</option>
+                <option value="2">2 major vessels</option>
+                <option value="3">3 major vessels</option>
+            </select>
+            <select name="thal">
+                <option value="1">Normal</option>
+                <option value="2">Fixed Defect</option>
+                <option value="3">Reversible Defect</option>
+            </select>
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction_text %}
+            <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+        {% if model_used %}
+            <div class="result" style="font-size: 16px; color: #666;">(Model used: {{ model_used }})</div>
+        {% endif %}
+
+    </div>
+    <footer>
+        Made with ❤️ for health prediction
+    </footer>
+</body>
+</html>
